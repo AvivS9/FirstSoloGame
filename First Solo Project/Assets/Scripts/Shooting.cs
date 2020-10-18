@@ -1,0 +1,46 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Shooting : MonoBehaviour
+{
+    public GunData gundata;
+
+    public Camera fpscam;
+    public float range = 100f;
+    public float damage = 10f;
+    public float impactForce = 10f;
+
+    public ParticleSystem muzzleflash;
+    public GameObject impactEffect;
+
+
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (Input.GetButtonDown("Fire1"))
+        {
+            Shoot();
+        }
+    }
+
+    void Shoot()
+    {
+        muzzleflash.Play();
+
+        RaycastHit hit;
+
+        if (Physics.Raycast(fpscam.transform.position, fpscam.transform.forward, out hit, range))//hit raycast from camera in range
+        {            
+            Debug.Log(hit.transform.tag);
+            if (hit.rigidbody != null)
+            {
+                hit.rigidbody.AddForce(-hit.normal * impactForce);
+            }
+
+            //GameObject impactreference = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(-hit.normal));//make it hit in the direction of the normal to the object
+            //Destroy(impactreference, 2f);//desteroy it after 2 seconds
+        }
+    }
+}
