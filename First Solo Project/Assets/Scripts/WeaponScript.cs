@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using JetBrains.Annotations;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,8 +11,8 @@ public class WeaponScript : MonoBehaviour
     public GunData[] GunData;
     public GameObject[] GunModels;
     public int damage;
-    public int AmmoPerMagazine;
-    public int MaxNumOfMagazines;
+    public int AmmoInMagazine;
+    public int NumOfMagazines;
     public string GunName;
     public int shotRate;
     private int gunIndex = 0;
@@ -48,10 +49,12 @@ public class WeaponScript : MonoBehaviour
         changeGun3DModel();
 
         damage = GunData[index].damage;
-        AmmoPerMagazine = GunData[index].AmmoPerMagazine;
-        MaxNumOfMagazines = GunData[index].MaxNumOfMagazines;
+        AmmoInMagazine = GunData[index].AmmoPerMagazine;
+        NumOfMagazines = GunData[index].MaxNumOfMagazines - 1; //one magazine is loaded
         GunName = GunData[index].GunName;
         shotRate = GunData[index].shotRate;
+
+        gameObject.GetComponent<Shooting>().changeAmmoText();
 
     }
 
@@ -72,19 +75,46 @@ public class WeaponScript : MonoBehaviour
             i++;
         }
 
-
-        /*
-        for (int i=0; i < numOfGuns; i++)
-        {
-            if (i == gunIndex)
-            {
-                GunModels[i].SetActive(true);
-            }
-            else
-            {
-                GunModels[i].SetActive(false);
-            }
-        }*/
+    
 
     }
+
+    public bool enoughAmmo()//we will check this to see if we can shoot
+    {
+        if (AmmoInMagazine > 0 || NumOfMagazines > 0)
+            return true;
+        return false;
+    }
+
+    public void decreaseAmmo(int decreaseAmount)
+    {
+
+        if (AmmoInMagazine - decreaseAmount <= 0)
+        {
+            if (NumOfMagazines > 0)
+            {
+                AmmoInMagazine += GunData[gunIndex].AmmoPerMagazine;
+                AmmoInMagazine -= decreaseAmount;
+                NumOfMagazines--;
+            }
+            else
+                AmmoInMagazine = 0;
+        }
+        else
+        {
+            AmmoInMagazine -= decreaseAmount;
+        }  
+
+    }
+
+    public int getNumMagazines()
+    {
+        return NumOfMagazines;
+    }
+
+    public int getAmmoInMagazine()
+    {
+        return AmmoInMagazine;
+    }
+
 }

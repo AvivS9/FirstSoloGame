@@ -10,6 +10,9 @@ public class GunData : ScriptableObject
     public int AmmoPerMagazine;
     public int MaxNumOfMagazines;
     public string GunName;
+    public float range = 100f;
+
+    public Sprite icon;
 
     public int shotRate;
 

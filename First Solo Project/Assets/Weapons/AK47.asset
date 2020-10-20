@@ -16,4 +16,6 @@ MonoBehaviour:
   AmmoPerMagazine: 50
   MaxNumOfMagazines: 3
   GunName: AK47
+  range: 100
+  icon: {fileID: 21300000, guid: c03c72978d15ecb4d91060d3a10d14f0, type: 3}
   shotRate: 5

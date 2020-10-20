@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Shooting : MonoBehaviour
 {
@@ -14,7 +15,12 @@ public class Shooting : MonoBehaviour
     public ParticleSystem muzzleflash;
     public GameObject impactEffect;
 
+    public Text AmmoText;
 
+    private void Start()
+    {
+        changeAmmoText();
+    }
 
     // Update is called once per frame
     void Update()
@@ -27,20 +33,55 @@ public class Shooting : MonoBehaviour
 
     void Shoot()
     {
-        muzzleflash.Play();
+        if (gameObject.GetComponent<WeaponScript>().enoughAmmo())
+        {
+            muzzleflash.Play();
 
-        RaycastHit hit;
+            RaycastHit hit;
 
-        if (Physics.Raycast(fpscam.transform.position, fpscam.transform.forward, out hit, range))//hit raycast from camera in range
-        {            
-            Debug.Log(hit.transform.tag);
-            if (hit.rigidbody != null)
+            if (Physics.Raycast(fpscam.transform.position, fpscam.transform.forward, out hit, range))//hit raycast from camera in range
             {
-                hit.rigidbody.AddForce(-hit.normal * impactForce);
-            }
+                Debug.Log(hit.transform.tag);
+                if (hit.rigidbody != null)
+                {
+                    hit.rigidbody.AddForce(-hit.normal * impactForce);
+                    if (hit.transform.tag == "Object")
+                        hit.transform.gameObject.SendMessageUpwards("destroyObject");
+                }
+                //GameObject impactreference = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(-hit.normal));//make it hit in the direction of the normal to the object
+                //Destroy(impactreference, 2f);//desteroy it after 2 seconds
 
-            //GameObject impactreference = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(-hit.normal));//make it hit in the direction of the normal to the object
-            //Destroy(impactreference, 2f);//desteroy it after 2 seconds
+
+                Interactable interactableItem = hit.collider.GetComponent<Interactable>();
+                if (interactableItem != null) //we hit an interactable item
+                {
+
+                    if (Vector3.Distance(transform.position, hit.transform.position) <= interactableItem.radius)
+                    {
+                        interactableItem.interact();
+                    }
+                    
+                }
+         
+            }
+            gameObject.GetComponent<WeaponScript>().decreaseAmmo(1);
+            changeAmmoText();
         }
+        else
+        {
+            Debug.Log("no more ammo");
+        }
+        
+    }
+
+    public void changeAmmoText()
+    {
+        string ammo = gameObject.GetComponent<WeaponScript>().getAmmoInMagazine().ToString();
+        string magazines = gameObject.GetComponent<WeaponScript>().getNumMagazines().ToString();
+
+
+        AmmoText.text = "Ammo: " + ammo + "\n" + "Magazines: " + magazines;
+
+
     }
 }
