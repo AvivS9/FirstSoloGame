@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Trunk1
   m_Shader: {fileID: 4800000, guid: c42ce9a27ea6fb444ae87b49dc21c23e, type: 3}
-  m_ShaderKeywords: _NORMALMAP
+  m_ShaderKeywords: ETC1_EXTERNAL_ALPHA _NORMALMAP
   m_LightmapFlags: 5
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
