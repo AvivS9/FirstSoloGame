@@ -13,9 +13,13 @@ MonoBehaviour:
   m_Name: AK47
   m_EditorClassIdentifier: 
   damage: 5
-  AmmoPerMagazine: 50
+  AmmoPerMagazine: 14
+  currentNumOfMagazines: 3
   MaxNumOfMagazines: 3
   GunName: AK47
   range: 100
+  model3Dprefab: {fileID: 4746316311377033864, guid: cb0ad83630c143749b7f783044c8d40c,
+    type: 3}
+  positionToInstantiate: {x: -0.3, y: 0.25, z: -0.5}
   icon: {fileID: 21300000, guid: c03c72978d15ecb4d91060d3a10d14f0, type: 3}
   shotRate: 5

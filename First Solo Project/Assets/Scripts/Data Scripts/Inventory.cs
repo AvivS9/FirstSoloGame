@@ -30,9 +30,19 @@ public class Inventory : MonoBehaviour
             Debug.Log("inventory full");
             return false;
         }
+        foreach (GunData currentgun in guns)
+        {
+            if (currentgun.name == gun.name)
+            {
+                Debug.Log("gun exists");
+                return false;//change this to add ammo instead
+            }
+        }
+       
         guns.Add(gun);
+        
 
-        if(OnItemChangedCallBack != null)//check that there is a method subscribed to it
+        if (OnItemChangedCallBack != null)//check that there is a method subscribed to it
             OnItemChangedCallBack.Invoke();
 
         return true;

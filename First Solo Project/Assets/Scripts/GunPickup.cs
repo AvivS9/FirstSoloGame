@@ -5,6 +5,7 @@ using UnityEngine;
 public class GunPickup : Interactable
 {
 
+    public GameObject player;
     public GunData gun;
     public override void interact()
     {
@@ -21,5 +22,13 @@ public class GunPickup : Interactable
         bool wasadded = Inventory.instance.AddGun(gun);
         if (wasadded)
             Destroy(gameObject);
+        //createguninhand(gun);
     }
+
+    /*
+    void createguninhand(GunData gun)
+    {
+        GameObject gunmodel = Instantiate(gun.model3Dprefab, player.transform.position, player.transform.rotation, player.transform);
+        gunmodel.transform.Rotate(0.0f, 180.0f, -40.0f, Space.World);
+    }*/
 }

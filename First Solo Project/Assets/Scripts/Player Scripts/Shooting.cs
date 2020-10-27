@@ -35,7 +35,8 @@ public class Shooting : MonoBehaviour
     {
         if (gameObject.GetComponent<WeaponScript>().enoughAmmo())
         {
-            muzzleflash.Play();
+            if (muzzleflash!= null)
+                muzzleflash.Play();
 
             RaycastHit hit;
 
