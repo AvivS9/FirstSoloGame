@@ -17,11 +17,13 @@ public class WeaponScript : MonoBehaviour
     public int shotRate;
     private int gunIndex = 0;
     private GameObject current3dmodel;
+    private AudioSource shotsound;
+
 
     void Start()
     {
         //numOfGuns = gunInventory.Count;
-
+        shotsound = transform.GetComponent<AudioSource>();
         gunInventory = Inventory.instance.guns;
         if (gunInventory.Count != 0)
             current3dmodel = Instantiate(gunInventory[0].model3Dprefab, transform.position, transform.rotation, transform);
@@ -62,6 +64,7 @@ public class WeaponScript : MonoBehaviour
         GunName = gunInventory[index].GunName;
         shotRate = gunInventory[index].shotRate;
 
+        shotsound.clip = gunInventory[index].shotsound;
         gameObject.GetComponent<Shooting>().changeAmmoText();
 
     }

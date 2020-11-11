@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityStandardAssets.Characters.ThirdPerson;
 
 public class Shooting : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class Shooting : MonoBehaviour
     public float range = 100f;
     public float damage = 10f;
     public float impactForce = 10f;
+    private AudioSource shotsound;
 
     public ParticleSystem muzzleflash;
     public GameObject impactEffect;
@@ -19,6 +21,7 @@ public class Shooting : MonoBehaviour
 
     private void Start()
     {
+        shotsound = transform.GetComponent<AudioSource>();
         changeAmmoText();
     }
 
@@ -37,6 +40,8 @@ public class Shooting : MonoBehaviour
         {
             if (muzzleflash!= null)
                 muzzleflash.Play();
+            shotsound.Play();
+            
 
             RaycastHit hit;
 
@@ -51,7 +56,8 @@ public class Shooting : MonoBehaviour
                 }
                 //GameObject impactreference = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(-hit.normal));//make it hit in the direction of the normal to the object
                 //Destroy(impactreference, 2f);//desteroy it after 2 seconds
-
+                
+                
 
                 Interactable interactableItem = hit.collider.GetComponent<Interactable>();
                 if (interactableItem != null) //we hit an interactable item

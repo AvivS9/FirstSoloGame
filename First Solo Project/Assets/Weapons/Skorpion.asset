@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: Skorpion
   m_EditorClassIdentifier: 
   damage: 3
-  AmmoPerMagazine: 7
-  currentNumOfMagazines: 3
+  AmmoPerMagazine: 4
+  currentNumOfMagazines: 1
   MaxNumOfMagazines: 5
   GunName: Skorpion
   range: 100
+  shotsound: {fileID: 8300000, guid: 95471dabafd4bdc4d9dc0dcc06a89eda, type: 3}
   model3Dprefab: {fileID: 7784786180297442701, guid: 4d14d2696e8b86148b01a8790cfad174,
     type: 3}
   positionToInstantiate: {x: -0.3, y: 0.25, z: -0.5}

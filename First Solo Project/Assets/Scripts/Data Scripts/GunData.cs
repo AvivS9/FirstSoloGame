@@ -12,6 +12,7 @@ public class GunData : ScriptableObject
     public int MaxNumOfMagazines;
     public string GunName;
     public float range = 100f;
+    public AudioClip shotsound;
 
     public GameObject model3Dprefab;
     public Vector3 positionToInstantiate;

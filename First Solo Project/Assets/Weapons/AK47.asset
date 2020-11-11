@@ -18,6 +18,7 @@ MonoBehaviour:
   MaxNumOfMagazines: 3
   GunName: AK47
   range: 100
+  shotsound: {fileID: 8300000, guid: 95471dabafd4bdc4d9dc0dcc06a89eda, type: 3}
   model3Dprefab: {fileID: 4746316311377033864, guid: cb0ad83630c143749b7f783044c8d40c,
     type: 3}
   positionToInstantiate: {x: -0.3, y: 0.25, z: -0.5}
