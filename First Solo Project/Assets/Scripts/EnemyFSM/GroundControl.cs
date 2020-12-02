@@ -12,7 +12,7 @@ public class GroundControl : StateMachineBehaviour
     public GameObject target;// target to aim for
 
     bool move = false;
-    private float radius = 10f;
+    public float radius = 10f;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -62,6 +62,7 @@ public class GroundControl : StateMachineBehaviour
             {
                 //Debug.Log("stop");
                 agent.isStopped = true;
+                EnemyCharacter.Move(agent.desiredVelocity, agent);
             }
         }
 
