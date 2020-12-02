@@ -9,7 +9,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
     {
         public UnityEngine.AI.NavMeshAgent agent { get; private set; }             // the navmesh agent required for the path finding
         public EnemyThirdPersonCharacter character { get; private set; } // the character we are controlling
-        public Vector3 target_position;                                    // target to aim for
+        public Vector3 target_position;
 
         //public EnemyAI
 
@@ -19,19 +19,24 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             agent = GetComponentInChildren<UnityEngine.AI.NavMeshAgent>();
             character = GetComponent<EnemyThirdPersonCharacter>();
 
-            target_position = transform.position;//makes him stay in place at the start
+            
 
             agent.updateRotation = false;
 	        agent.updatePosition = true;
+
+            target_position = transform.position;//makes him stay in place at the start
+            Debug.Log(target_position + "start" + transform.position);
         }
 
         
 
         private void Update()
         {
-            Debug.Log(agent.velocity);
+            //Debug.Log(agent.velocity);
+            if (target_position != transform.position)
+                Debug.Log(target_position + "asdf" + transform.position);
 
-            if (target_position != null)
+                Debug.Log(target_position + "pos");
                 agent.SetDestination(target_position);
 
             if (agent.remainingDistance > agent.stoppingDistance)

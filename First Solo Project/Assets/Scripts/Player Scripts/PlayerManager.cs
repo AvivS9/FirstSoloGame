@@ -16,11 +16,20 @@ public class PlayerManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown("space"))
+        if (Input.GetKeyDown("g"))
         {
             //make enemy chase after you
-            EnemyManager.instance.enemy.GetComponent<EnemyAICharacterControl>().SetTarget(fpscontroller.transform.position);
-        }
+            Debug.Log("lalal " + fpscontroller.transform.position);
+            //EnemyManager.instance.enemy.GetComponent<EnemyAI>().SetTarget(fpscontroller.transform.position);
             
+        }
+
+        if (Input.GetKeyDown("s"))
+        {
+            //make enemy stop chasing after you
+            //EnemyManager.instance.enemy.GetComponent<EnemyAI>().stopMoving();
+
+        }
+
     }
 }

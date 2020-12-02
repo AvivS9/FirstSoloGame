@@ -1,8 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace UnityStandardAssets.Characters.ThirdPerson
-{
+
 	[RequireComponent(typeof(Rigidbody))]
 	[RequireComponent(typeof(Animator))]
 	public class EnemyThirdPersonCharacter : MonoBehaviour
@@ -42,7 +41,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			// convert the world relative moveInput vector into a local-relative
 			// turn amount and forward amount required to head in the desired
 			// direction.
-			//if (move.magnitude > 1f) move.Normalize();
+			if (move.magnitude > 1f) move.Normalize();
 			move = transform.InverseTransformDirection(move);
 			move = Vector3.ProjectOnPlane(move, m_GroundNormal);
 			m_TurnAmount = Mathf.Atan2(move.x, move.z);
@@ -57,17 +56,18 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 		void UpdateAnimator(NavMeshAgent agent)
 		{
-			
 
-			m_Animator.SetFloat("movespeed", agent.velocity.magnitude);
+			//m_Animator.SetBool("IsAttacking", false);
+			m_Animator.SetFloat("Forward", m_ForwardAmount);
+			m_Animator.SetFloat("Turn", m_TurnAmount);
 
-			// calculate which leg is behind, so as to leave that leg trailing in the jump animation
-			// (This code is reliant on the specific run cycle offset in our animations,
-			// and assumes one leg passes the other at the normalized clip times of 0.0 and 0.5)
-			float runCycle =
+		// calculate which leg is behind, so as to leave that leg trailing in the jump animation
+		// (This code is reliant on the specific run cycle offset in our animations,
+		// and assumes one leg passes the other at the normalized clip times of 0.0 and 0.5)
+		float runCycle =
 				Mathf.Repeat(
 					m_Animator.GetCurrentAnimatorStateInfo(0).normalizedTime + m_RunCycleLegOffset, 1);
-			float jumpLeg = (runCycle < k_Half ? 1 : -1) * m_ForwardAmount;
+			//float jumpLeg = (runCycle < k_Half ? 1 : -1) * m_ForwardAmount;
 		
 
 			// the anim speed multiplier allows the overall speed of walking/running to be tweaked in the inspector,
@@ -79,8 +79,16 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			
 		}
 
-
+		public void attack()
+		{
+			m_Animator.SetBool("IsAttacking", true);
+		}
 		
+		public void stopAttack()
+		{
+			m_Animator.SetBool("IsAttacking", false);
+			Debug.Log("stopped attacking");
+		}
 
 
 	
@@ -109,4 +117,4 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 
 	}
-}
+

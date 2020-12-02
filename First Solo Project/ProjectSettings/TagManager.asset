@@ -8,6 +8,7 @@ TagManager:
   - Terrain
   - Object
   - Weapon
+  - PlayerManager
   layers:
   - Default
   - TransparentFX
