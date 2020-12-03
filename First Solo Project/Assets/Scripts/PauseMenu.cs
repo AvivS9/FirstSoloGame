@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,15 +13,27 @@ public class PauseMenu : MonoBehaviour
     public GameObject menu;
     public GameObject fpsController;
     private UnityStandardAssets.Characters.FirstPerson.FirstPersonController fpsControllerScript;
-    
 
+    public List<Sprite> Letters = new List<Sprite>(9);
+
+    public int[] foundLetters = new int[9];
+
+    public static PauseMenu instance;
 
     void Awake()
     {
+        if (instance != null)
+        {
+            Debug.LogWarning("More than one pause menu instance found");
+            return;
+        }
+        instance = this;
+
         fpsControllerScript = fpsController.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>();
     }
 
 
+    #region menu on/off
     private void MenuOn ()
     {
 
@@ -49,27 +63,12 @@ public class PauseMenu : MonoBehaviour
     }
 
 
-    public void OnMenuStatusChange ()
-    {
-        /*
-        if (m_MenuToggle.isOn && !m_Paused)
-        {
-            MenuOn();
-        }
-        else if (!m_MenuToggle.isOn && m_Paused)
-        {
-            MenuOff();
-        }*/
-    }
     
 
     void Update()
 	{
 		if(Input.GetKeyDown(KeyCode.Tab))
 		{
-		    //m_MenuToggle.isOn = !m_MenuToggle.isOn;
-            //Cursor.visible = m_MenuToggle.isOn;//force the cursor visible if anythign had hidden it
-
             if (!m_Paused)
             {
                 MenuOn();
@@ -80,5 +79,11 @@ public class PauseMenu : MonoBehaviour
             }
         }
 	}
+    #endregion
+    
 
+    public void addLetter(int letterID)
+    {
+        Debug.Log("adding letter");
+    }
 }

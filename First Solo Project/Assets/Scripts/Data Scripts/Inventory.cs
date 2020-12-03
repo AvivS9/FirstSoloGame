@@ -10,7 +10,7 @@ public class Inventory : MonoBehaviour
 
 
     public static Inventory instance;
-    public List<GunData> guns = new List<GunData>();
+
 
     public int maxInventorySpace = 20;
 
@@ -23,37 +23,5 @@ public class Inventory : MonoBehaviour
         }
         instance = this;
     }
-    public bool AddGun (GunData gun)
-    {
-        if (guns.Count > maxInventorySpace)
-        {
-            Debug.Log("inventory full");
-            return false;
-        }
-        foreach (GunData currentgun in guns)
-        {
-            if (currentgun.name == gun.name)
-            {
-                Debug.Log("gun exists");
-                return false;//change this to add ammo instead
-            }
-        }
-       
-        guns.Add(gun);
-        
-
-        if (OnItemChangedCallBack != null)//check that there is a method subscribed to it
-            OnItemChangedCallBack.Invoke();
-
-        return true;
-    }
-
-    public void RemoveGun (GunData gun)
-    {
-        guns.Remove(gun);
-        if (OnItemChangedCallBack != null)//check that there is a method subscribed to it
-            OnItemChangedCallBack.Invoke();
-    }
-
    
 }

@@ -4,10 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityStandardAssets.Characters.ThirdPerson;
 
-public class Shooting : MonoBehaviour
+public class ShootingOld : MonoBehaviour
 {
-    
-    //public GunData gundata;
+    /*
+    public GunData gundata;
 
     public Camera fpscam;
     public float range = 100f;
@@ -15,8 +15,8 @@ public class Shooting : MonoBehaviour
     public float impactForce = 10f;
     private AudioSource shotsound;
 
-    //public ParticleSystem muzzleflash;
-    //public GameObject impactEffect;
+    public ParticleSystem muzzleflash;
+    public GameObject impactEffect;
 
     public Text AmmoText;
 
@@ -39,8 +39,8 @@ public class Shooting : MonoBehaviour
     {
         if (gameObject.GetComponent<WeaponScript>().enoughAmmo())
         {
-            //if (muzzleflash!= null)
-              //  muzzleflash.Play();
+            if (muzzleflash!= null)
+                muzzleflash.Play();
             shotsound.Play();
             
 
@@ -91,5 +91,5 @@ public class Shooting : MonoBehaviour
         AmmoText.text = "Ammo: " + ammo + "\n" + "Magazines: " + magazines;
 
 
-    }
+    }*/
 }

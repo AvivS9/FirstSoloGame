@@ -19,9 +19,9 @@ public class GunPickup : Interactable
     void Pickup()
     {
         Debug.Log("picking up " + gun.GunName);
-        bool wasadded = Inventory.instance.AddGun(gun);
-        if (wasadded)
-            Destroy(gameObject);
+        //bool wasadded = Inventory.instance.AddGun(gun);
+        //if (wasadded)
+          //  Destroy(gameObject);
         //createguninhand(gun);
     }
 
