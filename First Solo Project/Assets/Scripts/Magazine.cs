@@ -20,6 +20,8 @@ public class Magazine : Interactable
         base.interact();
 
         player.GetComponentInChildren<WeaponScript>().addMagazine();
+
+        Destroy(gameObject);
         //player.GetComponent<WeaponScript>().addMagazine(); 
     }
 

@@ -9,6 +9,7 @@ TagManager:
   - Object
   - Weapon
   - PlayerManager
+  - Letter
   layers:
   - Default
   - TransparentFX

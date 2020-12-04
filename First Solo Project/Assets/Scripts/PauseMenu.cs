@@ -14,9 +14,12 @@ public class PauseMenu : MonoBehaviour
     public GameObject fpsController;
     private UnityStandardAssets.Characters.FirstPerson.FirstPersonController fpsControllerScript;
 
-    public List<Sprite> Letters = new List<Sprite>(9);
+    //public List<Sprite> Letters;
 
-    public int[] foundLetters = new int[9];
+    public GameObject Letters;
+    private Button[] LetterButtons;
+    public Image[] LetterImages;
+    //private int[] lettersfound = new int[9];
 
     public static PauseMenu instance;
 
@@ -29,6 +32,15 @@ public class PauseMenu : MonoBehaviour
         }
         instance = this;
 
+        LetterButtons = Letters.GetComponentsInChildren<Button>();
+
+        
+        for (int i = 0; i < LetterButtons.Length; i++)
+        {
+            LetterImages[i].enabled = false;
+            LetterButtons[i].interactable = false;
+        }
+        
         fpsControllerScript = fpsController.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>();
     }
 
@@ -36,6 +48,8 @@ public class PauseMenu : MonoBehaviour
     #region menu on/off
     private void MenuOn ()
     {
+
+        PlayerManager.instance.playing = false;
 
         fpsControllerScript.enabled = false;
         m_TimeScaleRef = Time.timeScale;
@@ -53,6 +67,8 @@ public class PauseMenu : MonoBehaviour
 
     public void MenuOff ()
     {
+        PlayerManager.instance.playing = true;
+
         fpsControllerScript.enabled = true;
         Time.timeScale = m_TimeScaleRef;
         AudioListener.volume = m_VolumeRef;
@@ -84,6 +100,16 @@ public class PauseMenu : MonoBehaviour
 
     public void addLetter(int letterID)
     {
-        Debug.Log("adding letter");
+        //Debug.Log("letter before " + lettersfound[letterID - 1]);
+        //lettersfound[letterID - 1] = 1;
+
+        LetterButtons[letterID-1].interactable = true;
+        LetterImages[letterID - 1].enabled = true;
+
+        //Image img = 
+
+        //Debug.Log("adding letter");
+
+        //Debug.Log("letter after " + lettersfound[letterID - 1]);
     }
 }

@@ -29,6 +29,9 @@ public class Shooting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (PlayerManager.instance.playing == false)
+            return;
+
         if (Input.GetButtonDown("Fire1"))
         {
             Shoot();
@@ -48,7 +51,7 @@ public class Shooting : MonoBehaviour
 
             if (Physics.Raycast(fpscam.transform.position, fpscam.transform.forward, out hit, range))//hit raycast from camera in range
             {
-                Debug.Log(hit.transform.tag);
+                //Debug.Log(hit.transform.tag);
                 if (hit.rigidbody != null)
                 {
                     hit.rigidbody.AddForce(-hit.normal * impactForce);
@@ -60,16 +63,7 @@ public class Shooting : MonoBehaviour
                 
                 
 
-                Interactable interactableItem = hit.collider.GetComponent<Interactable>();
-                if (interactableItem != null) //we hit an interactable item
-                {
-
-                    if (Vector3.Distance(transform.position, hit.transform.position) <= interactableItem.radius)
-                    {
-                        interactableItem.interact();
-                    }
-                    
-                }
+               
          
             }
             gameObject.GetComponent<WeaponScript>().decreaseAmmo(1);
