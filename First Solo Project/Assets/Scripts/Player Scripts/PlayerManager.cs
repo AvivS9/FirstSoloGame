@@ -6,8 +6,6 @@ using UnityStandardAssets.Characters.ThirdPerson;
 public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager instance;
-    //public GameObject player;
-    //public GameObject fpscontroller;
 
     public bool playing = true;
     // Start is called before the first frame update
@@ -15,7 +13,7 @@ public class PlayerManager : MonoBehaviour
     {
         instance = this;
 
-        //player = this.gameObject;
+        
     }
 
     

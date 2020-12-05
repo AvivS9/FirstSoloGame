@@ -10,6 +10,7 @@ TagManager:
   - Weapon
   - PlayerManager
   - Letter
+  - Pause Menu
   layers:
   - Default
   - TransparentFX

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -14,12 +15,16 @@ public class PauseMenu : MonoBehaviour
     public GameObject fpsController;
     private UnityStandardAssets.Characters.FirstPerson.FirstPersonController fpsControllerScript;
 
-    //public List<Sprite> Letters;
-
+    public Sprite[] PoemParts;
     public GameObject Letters;
-    private Button[] LetterButtons;
-    public Image[] LetterImages;
-    //private int[] lettersfound = new int[9];
+    private Button[] SlotButtons;
+    public Image[] SlotImages;
+
+    public GameObject LetterToShowPanel;
+    public Image LetterToShowImage;
+
+    bool LetterOpened = false;
+    
 
     public static PauseMenu instance;
 
@@ -31,14 +36,14 @@ public class PauseMenu : MonoBehaviour
             return;
         }
         instance = this;
-
-        LetterButtons = Letters.GetComponentsInChildren<Button>();
+        LetterToShowPanel.SetActive(false);
+        SlotButtons = Letters.GetComponentsInChildren<Button>();
 
         
-        for (int i = 0; i < LetterButtons.Length; i++)
+        for (int i = 0; i < SlotButtons.Length; i++)
         {
-            LetterImages[i].enabled = false;
-            LetterButtons[i].interactable = false;
+            SlotImages[i].enabled = false;
+            SlotButtons[i].interactable = false;
         }
         
         fpsControllerScript = fpsController.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>();
@@ -83,6 +88,12 @@ public class PauseMenu : MonoBehaviour
 
     void Update()
 	{
+        if (Input.anyKeyDown && LetterOpened == true)
+        {
+            LetterOpened = false;
+            LetterToShowPanel.SetActive(false);
+        }
+
 		if(Input.GetKeyDown(KeyCode.Tab))
 		{
             if (!m_Paused)
@@ -100,16 +111,19 @@ public class PauseMenu : MonoBehaviour
 
     public void addLetter(int letterID)
     {
-        //Debug.Log("letter before " + lettersfound[letterID - 1]);
-        //lettersfound[letterID - 1] = 1;
 
-        LetterButtons[letterID-1].interactable = true;
-        LetterImages[letterID - 1].enabled = true;
+        SlotButtons[letterID-1].interactable = true;
+        SlotImages[letterID - 1].enabled = true;
 
-        //Image img = 
-
-        //Debug.Log("adding letter");
-
-        //Debug.Log("letter after " + lettersfound[letterID - 1]);
     }
+
+    public void showLetter(int id)
+    {
+        LetterToShowImage.sprite = PoemParts[id - 1];
+        LetterOpened = true;
+        LetterToShowPanel.SetActive(true);
+        //Debug.Log("showing letter with button " + id);
+    }
+
+    
 }
