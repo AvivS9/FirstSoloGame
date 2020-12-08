@@ -17,7 +17,7 @@ public class GroundControl : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        target = GameObject.Find("FPSController");
+        target = GameObject.Find("Player");
         NPC = animator.gameObject;
         agent = NPC.GetComponent<NavMeshAgent>();
         EnemyCharacter = NPC.GetComponent<EnemyThirdPersonCharacter>();
